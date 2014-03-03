@@ -28,6 +28,19 @@
       }).error(function() {});
     };
 
+    var get = function(name, data) {
+      var t = this;
+      data = data || {};
+
+      data.id = t.id;
+
+      query('artist/' + name, data, function(result) {
+        t[name] = result[name];
+      });
+
+      return t;
+    };
+
     this.setApiKey = function(value) {
       apiKey = value;
     };
@@ -47,47 +60,65 @@
     };
 
     Artist.prototype = {
-      getBiographies: function() {
-        this.get('biographies', data);
+      getBiographies: function(data) {
+        get.call(this, 'biographies', data);
 
         return this;
       },
-      getBlogs: function() {
-        this.get('blogs', data);
+      getBlogs: function(data) {
+        get.call(this, 'blogs', data);
 
         return this;
       },
-      getImages: function() {
-        this.get('images', data);
+      getImages: function(data) {
+        get.call(this, 'images', data);
 
         return this;
       },
-      getNews: function() {
-        this.get('news', data);
+      getNews: function(data) {
+        get.call(this, 'news', data);
 
         return this;
       },
       getReviews: function(data) {
-        this.get('reviews', data);
+        get.call(this, 'reviews', data);
 
         return this;
       },
       getSongs: function(data) {
-        this.get('songs', data);
+        get.call(this, 'songs', data);
 
         return this;
       },
-      get: function(name, data) {
-        var t = this;
-        data = data || {};
+      getFamiliarity: function(data) {
+        get.call(this, 'familiarity', data);
 
-        data.id = t.id;
+        return this;
+      },
+      getHotttnesss: function(data) {
+        get.call(this, 'hotttnesss', data);
 
-        query('artist/' + name, data, function(result) {
-          t[name] = result[name];
-        });
+        return this;
+      },
+      getSimilar: function(data) {
+        get.call(this, 'similar', data);
 
-        return t;
+        return this;
+      },
+      getTerms: function(data) {
+        get.call(this, 'terms', data);
+
+        return this;
+      },
+      getTwitter: function(data) {
+        get.call(this, 'twitter', data);
+
+        return this;
+      },
+      getUrls: function(data) {
+        get.call(this, 'urls', data);
+
+        return this;
       }
     };
 

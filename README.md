@@ -38,7 +38,12 @@ myApp.controller('SomeCtrl', function($scope, Echonest) {
   * getNews
   * getReviews
   * getSongs
-  * get
+  * getFamiliarity
+  * getHotttnesss
+  * getSimilar
+  * getTerms
+  * getTwitter
+  * getUrls
 
 (Api Doc)[http://developer.echonest.com/docs/v4/artist.html]
 
