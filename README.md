@@ -10,6 +10,10 @@ This module is still under heavy development.
 
 ## Installation
 ```js
+var myApp = angular.module('myApp', [
+  'angular-echonest'
+]);
+
 myApp.config(['EchonestProvider', function(EchonestProvider) {
   EchonestProvider.setApiKey('apiKey');
 }]);
@@ -45,7 +49,7 @@ myApp.controller('SomeCtrl', function($scope, Echonest) {
 // Multiple requests
 Echonest.artists.get({
   name: 'nirvana'
-}, function(artist) {
+}, function(artist, status) {
   artist.getSongs(); // -> id: "ARH3S5S1187FB4F76B", name: "Nirvana", songs: Array[15]
 });
 ```
@@ -79,4 +83,4 @@ Echonest.artists.search({
 
 <br>
 ---
-© 2014 [Maciej Podsiedlak](http://mpodsiedlak.com) - Released under MIT License
+© 2014 [Maciej Podsiedlak](http://mpodsiedlak.com) - Released under MIT [License](https://github.com/Kraku/angular-echonest/blob/master/LICENSE)
