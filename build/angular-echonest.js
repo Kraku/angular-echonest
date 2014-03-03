@@ -11,7 +11,7 @@
   angular.module('angular-echonest', []).provider('Echonest', function() {
     var apiUrl = 'http://developer.echonest.com/api/v4/';
     var apiKey = '';
-    var Artist, Artists, obj, http;
+    var Artist, Artists, Songs, obj, http;
 
     var query = function(url, data, callback) {
       data.api_key = apiKey;
@@ -40,7 +40,7 @@
       return t;
     };
 
-    var artistsParams = function(params) {
+    var getParams = function(params) {
       var data = [];
 
       if (params instanceof Object) {
@@ -161,11 +161,13 @@
        * doc: http://developer.echonest.com/docs/v4/artist.html#search
        */
       search: function(params, callback) {
-        var data = artistsParams(params);
+        var data = getParams(params);
 
         artistsGet.call(this, 'search', data, function(artists, status) {
           callback(artists, status);
         });
+
+        return this;
       },
 
       /*
@@ -179,6 +181,8 @@
             callback(new Artist(result.artist), result.status);
           });
         }
+
+        return this;
       },
 
       /*
@@ -187,11 +191,13 @@
        * doc: http://developer.echonest.com/docs/v4/artist.html#top-hottt
        */
       topHot: function(params, callback) {
-        var data = artistsParams(params);
+        var data = getParams(params);
 
         artistsGet.call(this, 'top_hottt', data, function(artists, status) {
           callback(artists, status);
         });
+
+        return this;
       },
 
       /*
@@ -200,11 +206,13 @@
        * doc: http://developer.echonest.com/docs/v4/artist.html#suggest-beta
        */
       suggest: function(params, callback) {
-        var data = artistsParams(params);
+        var data = getParams(params);
 
         artistsGet.call(this, 'suggest', data, function(artists, status) {
           callback(artists, status);
         });
+
+        return this;
       },
 
       /*
@@ -213,11 +221,67 @@
        * doc: http://developer.echonest.com/docs/v4/artist.html#extract-beta
        */
       extract: function(params, callback) {
-        var data = artistsParams(params);
+        var data = getParams(params);
 
         artistsGet.call(this, 'extract', data, function(artists, status) {
           callback(artists, status);
         });
+
+        return this;
+      }
+    };
+
+
+    // Songs class
+    Songs = function() {
+      return this;
+    };
+
+    Songs.prototype = {
+
+      /*
+       * Search for songs given different query types.
+       *
+       * doc: http://developer.echonest.com/docs/v4/song.html#search
+       */
+      search: function(params, callback) {
+        var data = getParams(params);
+
+        query('song/search', data, function(result) {
+          callback(result.songs, result.status);
+        });
+
+        return this;
+      },
+
+      /*
+       * Get info about songs given a list of ids.
+       *
+       * doc: http://developer.echonest.com/docs/v4/song.html#profile
+       */
+      get: function(data, callback) {
+        if (data instanceof Object) {
+          query('song/profile', data, function(result) {
+            callback(result.songs[0], result.status);
+          });
+        }
+
+        return this;
+      },
+
+      /*
+       * Identifies a song given an Echoprint or Echo Nest Musical Fingerprint hash codes.
+       *
+       * doc: http://developer.echonest.com/docs/v4/song.html#identify
+       */
+      identify: function(params, callback) {
+        var data = getParams(params);
+
+        query('song/identify', data, function(result) {
+          callback(result.songs, result.status);
+        });
+
+        return this;
       }
     };
 
@@ -226,7 +290,8 @@
       http = $http;
 
       obj = {
-        artists: new Artists()
+        artists: new Artists(),
+        songs: new Songs()
       };
 
       return obj;

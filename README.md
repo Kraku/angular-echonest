@@ -1,4 +1,4 @@
-Angular-echonest
+Angular-echonest v0.2.0
 =============
 
 Angular-echonest allows you to easily call Echo Nest methods in AngularJS.
@@ -30,7 +30,7 @@ myApp.controller('SomeCtrl', function($scope, Echonest) {
 
 ### Artists Methods
   - **search** - Search artists.
-  - **get** - Get artists by id or name.
+  - **get** - Get artist by id or name.
   - **topHot** - Return a list of the top hottt artists.
   - **suggest** - Suggest artists based upon partial names. This method will return a list of potential artist matches based upon a query string. The method returns the most familiar best matching artist for the query.
   - **extract** - Extract artist names from text.
@@ -49,7 +49,15 @@ myApp.controller('SomeCtrl', function($scope, Echonest) {
   - **getTwitter** - Gets the twitter handle for an artist.
   - **getUrls** - Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, and official URL.
 
-[Api Doc](http://developer.echonest.com/docs/v4/artist.html)
+[Artist Api Doc](http://developer.echonest.com/docs/v4/artist.html)
+
+### Songs Methods
+  - **search** - Search for songs given different query types.
+  - **get** - Get song by id or track_id.
+  - **identify** - Identifies a song given an Echoprint or Echo Nest Musical Fingerprint hash codes.
+
+[Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
+
 
 ## Example
 #### Get artist songs
@@ -101,11 +109,40 @@ Echonest.artists.topHot({
 });
 ```
 
+#### Get song by artist and title
+```js
+Echonest.songs.search({
+  artist: 'radiohead',
+  title: 'karma police'
+}, function(songs, status) {
+  songs; // -> [{artist_id: "ARH6W4X1187B99274F", artist_name: "Radiohead", id: "SOHJOLH12A6310DFE5", title: "Karma Police"}, {...}]
+});
+```
+
+#### Get song by id
+```js
+Echonest.songs.get({
+  id: 'SOCZMFK12AC468668F'
+}, function(song, status) {
+  song; // -> {artist_id: "ARZHQSP12FE086C216", id: "SOCZMFK12AC468668F", artist_name: "Wil-Lean", title: "Stay Fly"}
+});
+```
+
+#### Get song by code, artist and title
+```js
+Echonest.songs.identify({
+  artist: 'Michael Jackson',
+  title: 'Billie Jean',
+  code: 'eJxVlIuNwzAMQ1fxCDL133-xo1rnGqNAEcWy_ERa2aKeZmW9ustWVYrXrl5bthn_laFkzguNWpklEmoTB74JKYZSPlbJ0sy9fQrsrbEaO9W3bsbaWOoK7IhkHFaf_ag2d75oOQSZczbz5CKA7XgTIBIXASvFi0A3W8pMUZ7FZTWTVbujCcADlQ_f_WbdRNJ2vDUwSF0EZmFvAku_CVy440fgiIvArWZZWoJ7GWd-CVTYC5FCFI8GQdECdROE20UQfLoIUmhLC7IiByF1gzbAs3tsSKctyC76MPJlHRsZ5qhSQhu_CJFcKtW4EMrHSIrpTGLFqsdItj1H9JYHQYN7W2nkC6GDPjZTAzL9dx0fS4M1FoROHh9YhLHWdRchQSd_CLTpOHkQQP3xQsA2-sLOUD7CzxU0GmHVdIxh46Oide0NrNEmjghG44Ax_k2AoDHsiV6WsiD6OFm8y-0Lyt8haDBBzeMlAnTuuGYIB4WA2lEPAWbdeOabgFN6TQMs6ctLA5fHyKMBB0veGrjPfP00IAlWNm9n7hEh5PiYYBGKQDP-x4F0CL8HkhoQnRWN997JyEpnHFR7EhLPQMZmgXS68hsHktEVErranvSSR2VwfJhQCnkuwhBUcINNY-xu1pmw3PmBqU9-8xu0kiF1ngOa8vwBSSzzNw=='
+}, function(songs, status) {
+  songs; // -> [{artist_id: "ARXPPEY1187FB51DF4", artist_name: "Michael Jackson", id: "SODJXOA1313438FB61", message: "OK (match type 5)", score: 54, title: "Billie Jean"}]
+});
+```
+
 ## TO DO
   * Unit tests
-  * Song support
-  * Track support
-  * Playlist support
+  * Genre API Methods
+  * Track API Methods
 
 <br>
 ---
