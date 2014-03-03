@@ -5,12 +5,15 @@ Angular-echonest allows you to easily call Echo Nest methods in AngularJS.
 
 Uses EchoNest API v4.
 
-# Status
+## Status
 This module is still under heavy development.
 
-# Installation
-------------
+## Installation
 ```js
+var myApp = angular.module('myApp', [
+  'angular-echonest'
+]);
+
 myApp.config(['EchonestProvider', function(EchonestProvider) {
   EchonestProvider.setApiKey('apiKey');
 }]);
@@ -18,20 +21,18 @@ myApp.config(['EchonestProvider', function(EchonestProvider) {
 
 Get [an API key](http://developer.echonest.com/docs/v4/#keys).
 
-# Usage
-------------
+## Usage
 ```js
 myApp.controller('SomeCtrl', function($scope, Echonest) {
   ...
 });
 ```
-------------
 
-## Artists Methods
+### Artists Methods
   * artists.search
   * artists.get
 
-## Artist Methods
+### Artist Methods
   * getBiographies
   * getBlogs
   * getImages
@@ -45,16 +46,15 @@ myApp.controller('SomeCtrl', function($scope, Echonest) {
   * getTwitter
   * getUrls
 
-(Api Doc)[http://developer.echonest.com/docs/v4/artist.html]
+[Api Doc](http://developer.echonest.com/docs/v4/artist.html)
 
-# Example
-------------
+## Example
 #### Get artist songs
 ```js
 // Multiple requests
 Echonest.artists.get({
   name: 'nirvana'
-}, function(artist) {
+}, function(artist, status) {
   artist.getSongs(); // -> id: "ARH3S5S1187FB4F76B", name: "Nirvana", songs: Array[15]
 });
 ```
@@ -78,14 +78,14 @@ Echonest.artists.search({
 }, function(artists, status) {
   artists; // -> [{id: "AR12F2S1187FB56EEF", name: "Aerosmith"}, {...}, {...}]
 });
+```
 
-
-### TO DO
+## TO DO
   * Song methods
   * Track methods
   * Playlist methods
   * Song methods
 
-
+<br>
 ---
-© 2014 [Maciej Podsiedlak](mpodsiedlak.com) - Released under MIT License
+© 2014 [Maciej Podsiedlak](http://mpodsiedlak.com) - Released under MIT [License](https://github.com/Kraku/angular-echonest/blob/master/LICENSE)
