@@ -1,4 +1,3 @@
-
 /**
  * angular-echonest module
  * https://github.com/kraku/angular-echonest
@@ -28,7 +27,7 @@
       }).error(function() {});
     };
 
-    var get = function(name, data) {
+    var artistGet = function(name, data) {
       var t = this;
       data = data || {};
 
@@ -39,6 +38,32 @@
       });
 
       return t;
+    };
+
+    var artistsParams = function(params) {
+      var data = [];
+
+      if (params instanceof Object) {
+        for (var i in params) {
+          if (params.hasOwnProperty(i)) {
+            data[i] = params[i];
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var artistsGet = function(name, data, callback) {
+      query('artist/' + name, data, function(result) {
+        var artists = [];
+
+        for (var i in result.artists) {
+          artists.push(new Artist(result.artists[i]));
+        }
+
+        callback(artists, result.status);
+      });
     };
 
     this.setApiKey = function(value) {
@@ -61,62 +86,62 @@
 
     Artist.prototype = {
       getBiographies: function(data) {
-        get.call(this, 'biographies', data);
+        artistGet.call(this, 'biographies', data);
 
         return this;
       },
       getBlogs: function(data) {
-        get.call(this, 'blogs', data);
+        artistGet.call(this, 'blogs', data);
 
         return this;
       },
       getImages: function(data) {
-        get.call(this, 'images', data);
+        artistGet.call(this, 'images', data);
 
         return this;
       },
       getNews: function(data) {
-        get.call(this, 'news', data);
+        artistGet.call(this, 'news', data);
 
         return this;
       },
       getReviews: function(data) {
-        get.call(this, 'reviews', data);
+        artistGet.call(this, 'reviews', data);
 
         return this;
       },
       getSongs: function(data) {
-        get.call(this, 'songs', data);
+        artistGet.call(this, 'songs', data);
 
         return this;
       },
       getFamiliarity: function(data) {
-        get.call(this, 'familiarity', data);
+        artistGet.call(this, 'familiarity', data);
 
         return this;
       },
-      getHotttnesss: function(data) {
-        get.call(this, 'hotttnesss', data);
+      getHotnes: function(data) {
+        artistGet.call(this, 'hotttnesss', data);
 
         return this;
       },
       getSimilar: function(data) {
-        get.call(this, 'similar', data);
+        artistGet.call(this, 'similar', data);
 
         return this;
       },
       getTerms: function(data) {
-        get.call(this, 'terms', data);
+        artistGet.call(this, 'terms', data);
 
         return this;
       },
       getTwitter: function(data) {
-        get.call(this, 'twitter', data);
+        artistGet.call(this, 'twitter', data);
 
         return this;
       },
       getUrls: function(data) {
-        get.call(this, 'urls', data);
+        artistGet.call(this, 'urls', data);
 
         return this;
       }
@@ -136,29 +161,17 @@
        * doc: http://developer.echonest.com/docs/v4/artist.html#search
        */
       search: function(params, callback) {
-        var data = [];
+        var data = artistsParams(params);
 
-        if (params instanceof Object) {
-          for (var i in params) {
-            if (params.hasOwnProperty(i)) {
-              data[i] = params[i];
-            }
-          }
-        }
-
-        query('artist/search', data, function(result) {
-          var artists = [];
-
-          for (var i in result.artists) {
-            artists.push(new Artist(result.artists[i]));
-          }
-
-          callback(artists, result.status);
+        artistsGet.call(this, 'search', data, function(artists, status) {
+          callback(artists, status);
         });
       },
 
       /*
        * Get artist
+       *
+       * doc: http://developer.echonest.com/docs/v4/artist.html#profile
        */
       get: function(data, callback) {
         if (data instanceof Object) {
@@ -166,6 +179,45 @@
             callback(new Artist(result.artist), result.status);
           });
         }
+      },
+
+      /*
+       * Return a list of the top hottt artists.
+       *
+       * doc: http://developer.echonest.com/docs/v4/artist.html#top-hottt
+       */
+      topHot: function(params, callback) {
+        var data = artistsParams(params);
+
+        artistsGet.call(this, 'top_hottt', data, function(artists, status) {
+          callback(artists, status);
+        });
+      },
+
+      /*
+       * Suggest artists based upon partial names.
+       *
+       * doc: http://developer.echonest.com/docs/v4/artist.html#suggest-beta
+       */
+      suggest: function(params, callback) {
+        var data = artistsParams(params);
+
+        artistsGet.call(this, 'suggest', data, function(artists, status) {
+          callback(artists, status);
+        });
+      },
+
+      /*
+       * Extract artist names from text.
+       *
+       * doc: http://developer.echonest.com/docs/v4/artist.html#extract-beta
+       */
+      extract: function(params, callback) {
+        var data = artistsParams(params);
+
+        artistsGet.call(this, 'extract', data, function(artists, status) {
+          callback(artists, status);
+        });
       }
     };
 
