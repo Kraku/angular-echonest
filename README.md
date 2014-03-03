@@ -79,4 +79,4 @@ Echonest.artists.search({
 
 <br>
 ---
-© 2014 [Maciej Podsiedlak](mpodsiedlak.com) - Released under MIT License
+© 2014 [Maciej Podsiedlak](http://mpodsiedlak.com) - Released under MIT License
