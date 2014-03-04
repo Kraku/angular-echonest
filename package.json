@@ -1,7 +1,7 @@
 {
   "name": "angular-echonest",
   "description": "Echonest adapter for AngularJS.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Maciej Podsiedlak <maciej.podsiedlak@gmail.com>",
   "main": "angular-echonest.js",
   "repository": {
@@ -13,6 +13,6 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-contrib-copy": "*",
-    "grunt-contrib-livereload": "*"
+    "grunt-karma": "*"
 	}
 }

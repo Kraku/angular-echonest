@@ -1,4 +1,4 @@
-Angular-echonest v0.2.0
+Angular-echonest v0.2.1
 =============
 
 Angular-echonest allows you to easily call Echo Nest methods in AngularJS.
@@ -26,6 +26,16 @@ Get [an API key](http://developer.echonest.com/docs/v4/#keys).
 myApp.controller('SomeCtrl', function($scope, Echonest) {
   ...
 });
+```
+
+## Tests
+```
+npm install
+bower install angular
+bower install angular-mocks
+
+grunt karma:unit
+
 ```
 
 ### Artists Methods
@@ -140,7 +150,6 @@ Echonest.songs.identify({
 ```
 
 ## TO DO
-  * Unit tests
   * Genre API Methods
   * Track API Methods
 

@@ -40,6 +40,12 @@ module.exports = function (grunt) {
           livereload: true
         },
       }
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.config.js'
+      }
     }
   });
 
@@ -47,6 +53,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('build', ['uglify', 'copy']);
