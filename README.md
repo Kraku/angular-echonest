@@ -75,7 +75,7 @@ grunt karma:unit
 // Multiple requests
 Echonest.artists.get({
   name: 'nirvana'
-}, function(artist, status) {
+}).then(function(artist, status) {
   artist.getSongs(); // -> {id: "ARH3S5S1187FB4F76B", name: "Nirvana", songs: Array[15]}
 });
 
@@ -85,7 +85,7 @@ Echonest.artists.get({
 Echonest.artists.get({
   name: 'nirvana',
   bucket: 'songs'
-}, function(artist, status) {
+}).then(function(artist, status) {
   artist; // -> {id: "ARH3S5S1187FB4F76B", name: "Nirvana", songs: Array[15]}
 });
 ```
@@ -95,7 +95,7 @@ Echonest.artists.get({
 Echonest.artists.search({ 
   artist_location: 'boston',
   results: 3
-}, function(artists, status) {
+}).then(function(artists, status) {
   artists; // -> [{id: "AR12F2S1187FB56EEF", name: "Aerosmith"}, {...}, {...}]
 });
 ```
@@ -104,7 +104,7 @@ Echonest.artists.search({
 ```js
 Echonest.artists.get({ 
   name: 'motorhead'
-}, function(artist, status) {
+}).then(function(artist, status) {
   artist; // -> {id: "AR212SC1187FB4A4F9", name: "Motörhead"}
 });
 ```
@@ -114,7 +114,7 @@ Echonest.artists.get({
 Echonest.artists.topHot({
   genre: 'rock',
   results: 10
-}, function(artists, status) {
+}).then(function(artists, status) {
   artists; // -> [{id: "ARUJ5A41187FB3F5F1", name: "U2"}, {...}, {...}]
 });
 ```
@@ -124,7 +124,7 @@ Echonest.artists.topHot({
 Echonest.songs.search({
   artist: 'radiohead',
   title: 'karma police'
-}, function(songs, status) {
+}).then(function(songs, status) {
   songs; // -> [{artist_id: "ARH6W4X1187B99274F", artist_name: "Radiohead", id: "SOHJOLH12A6310DFE5", title: "Karma Police"}, {...}]
 });
 ```
@@ -133,7 +133,7 @@ Echonest.songs.search({
 ```js
 Echonest.songs.get({
   id: 'SOCZMFK12AC468668F'
-}, function(song, status) {
+}).then(function(song, status) {
   song; // -> {artist_id: "ARZHQSP12FE086C216", id: "SOCZMFK12AC468668F", artist_name: "Wil-Lean", title: "Stay Fly"}
 });
 ```
@@ -144,7 +144,7 @@ Echonest.songs.identify({
   artist: 'Michael Jackson',
   title: 'Billie Jean',
   code: 'eJxVlIuNwzAMQ1fxCDL133-xo1rnGqNAEcWy_ERa2aKeZmW9ustWVYrXrl5bthn_laFkzguNWpklEmoTB74JKYZSPlbJ0sy9fQrsrbEaO9W3bsbaWOoK7IhkHFaf_ag2d75oOQSZczbz5CKA7XgTIBIXASvFi0A3W8pMUZ7FZTWTVbujCcADlQ_f_WbdRNJ2vDUwSF0EZmFvAku_CVy440fgiIvArWZZWoJ7GWd-CVTYC5FCFI8GQdECdROE20UQfLoIUmhLC7IiByF1gzbAs3tsSKctyC76MPJlHRsZ5qhSQhu_CJFcKtW4EMrHSIrpTGLFqsdItj1H9JYHQYN7W2nkC6GDPjZTAzL9dx0fS4M1FoROHh9YhLHWdRchQSd_CLTpOHkQQP3xQsA2-sLOUD7CzxU0GmHVdIxh46Oide0NrNEmjghG44Ax_k2AoDHsiV6WsiD6OFm8y-0Lyt8haDBBzeMlAnTuuGYIB4WA2lEPAWbdeOabgFN6TQMs6ctLA5fHyKMBB0veGrjPfP00IAlWNm9n7hEh5PiYYBGKQDP-x4F0CL8HkhoQnRWN997JyEpnHFR7EhLPQMZmgXS68hsHktEVErranvSSR2VwfJhQCnkuwhBUcINNY-xu1pmw3PmBqU9-8xu0kiF1ngOa8vwBSSzzNw=='
-}, function(songs, status) {
+}).then(function(songs, status) {
   songs; // -> [{artist_id: "ARXPPEY1187FB51DF4", artist_name: "Michael Jackson", id: "SODJXOA1313438FB61", message: "OK (match type 5)", score: 54, title: "Billie Jean"}]
 });
 ```
