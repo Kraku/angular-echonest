@@ -56,7 +56,7 @@ describe('Artists', function() {
 
     echonest.artists.get({
       name: 'motorhead'
-    }, function(artist, status) {
+    }).then(function(artist, status) {
       result = artist;
     });
 
@@ -89,7 +89,7 @@ describe('Artists', function() {
   it('get method should return artist object', function() {
     echonest.artists.get({
       name: 'motorhead'
-    }, function(artist, status) {
+    }).then(function(artist) {
       expect(artist.constructor.name).toBe('Object');
       expect(artist.id).toBe('AR212SC1187FB4A4F9');
       expect(artist.name).toBe('motorhead');
@@ -101,7 +101,7 @@ describe('Artists', function() {
   it('search method should return array of artist objects', function() {
     echonest.artists.search({
       name: 'motorhead'
-    }, function(artists, status) {
+    }).then(function(artists, status) {
       expect(artists.constructor.name).toBe('Array');
       expect(artists[0].constructor.name).toBe('Object');
       expect(artists[0].id).toBe('AR212SC1187FB4A4F9');
@@ -114,7 +114,7 @@ describe('Artists', function() {
   it('topHot method should return array of artist objects', function() {
     echonest.artists.topHot({
       results: 3
-    }, function(artists, status) {
+    }).then(function(artists, status) {
       expect(artists.constructor.name).toBe('Array');
       expect(artists[0].constructor.name).toBe('Object');
       expect(artists[0].id).toBe('AR212SC1187FB4A4F9');
@@ -127,7 +127,7 @@ describe('Artists', function() {
   it('suggest method should return array of artist objects', function() {
     echonest.artists.suggest({
       name: 'motorhead'
-    }, function(artists, status) {
+    }).then(function(artists, status) {
       expect(artists.constructor.name).toBe('Array');
       expect(artists[0].constructor.name).toBe('Object');
       expect(artists[0].id).toBe('AR212SC1187FB4A4F9');
@@ -140,7 +140,7 @@ describe('Artists', function() {
   it('extract method should return array of artist objects', function() {
     echonest.artists.extract({
       text: 'abc motorhead abc'
-    }, function(artists, status) {
+    }).then(function(artists, status) {
       expect(artists.constructor.name).toBe('Array');
       expect(artists[0].constructor.name).toBe('Object');
       expect(artists[0].id).toBe('AR212SC1187FB4A4F9');
@@ -150,9 +150,6 @@ describe('Artists', function() {
     httpBackend.flush();
   });
 
-  //  
-  // Artist
-  //
   it('all artist methods should insert array into artist object', function() {
     var artist = getSingleArtist()
       .getBiographies()

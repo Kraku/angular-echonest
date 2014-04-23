@@ -69,7 +69,7 @@ describe('Artists', function() {
   it('get method should return song object', function() {
     echonest.songs.get({
       id: 'SOCZMFK12AC468668F'
-    }, function(song, status) {
+    }).then(function(song, status) {
       expect(song.artist_id).toBe('456');
       expect(song.id).toBe('74574');
       expect(song.artist_name).toBe('motorhead');
@@ -82,7 +82,7 @@ describe('Artists', function() {
   it('search method should return array of song objects', function() {
     echonest.songs.search({
       name: 'foo bar'
-    }, function(songs, status) {
+    }).then(function(songs, status) {
       expect(songs.constructor.name).toBe('Array');
       expect(songs[0].constructor.name).toBe('Object');
       expect(songs[0].artist_id).toBe('456');
@@ -99,7 +99,7 @@ describe('Artists', function() {
       artist: 'Michael Jackson',
       title: 'Billie Jean',
       code: 'eJxVlIuNwzAMQ1fxC'
-    }, function(songs, status) {
+    }).then(function(songs, status) {
       expect(songs.constructor.name).toBe('Array');
       expect(songs[0].constructor.name).toBe('Object');
       expect(songs[0].artist_id).toBe('456');
