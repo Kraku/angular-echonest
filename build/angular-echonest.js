@@ -11,9 +11,11 @@
   angular.module('angular-echonest', []).provider('Echonest', function() {
     var apiUrl = 'http://developer.echonest.com/api/v4/';
     var apiKey = '';
-    var Artist, Artists, Songs, obj, http;
+    var Artist, Artists, Songs, obj, http, q;
 
-    var query = function(url, data, callback) {
+    var query = function(url, data) {
+      var deferred = q.defer();
+
       data.api_key = apiKey;
       data.format = 'jsonp';
       data.callback = 'JSON_CALLBACK';
@@ -23,8 +25,10 @@
         url: apiUrl + url,
         params: data
       }).success(function(result) {
-        callback(result.response);
-      }).error(function() {});
+        deferred.resolve(result.response);
+      });
+
+      return deferred.promise;
     };
 
     var artistGet = function(name, data) {
@@ -33,7 +37,7 @@
 
       data.id = t.id;
 
-      query('artist/' + name, data, function(result) {
+      query('artist/' + name, data).then(function(result) {
         t[name] = result[name];
       });
 
@@ -54,15 +58,15 @@
       return data;
     };
 
-    var artistsGet = function(name, data, callback) {
-      query('artist/' + name, data, function(result) {
+    var artistsGet = function(name, data) {
+      return query('artist/' + name, data).then(function(result) {
         var artists = [];
 
         for (var i in result.artists) {
           artists.push(new Artist(result.artists[i]));
         }
 
-        callback(artists, result.status);
+        return artists;
       });
     };
 
@@ -160,14 +164,10 @@
        *
        * doc: http://developer.echonest.com/docs/v4/artist.html#search
        */
-      search: function(params, callback) {
+      search: function(params) {
         var data = getParams(params);
 
-        artistsGet.call(this, 'search', data, function(artists, status) {
-          callback(artists, status);
-        });
-
-        return this;
+        return artistsGet.call(this, 'search', data);
       },
 
       /*
@@ -175,14 +175,12 @@
        *
        * doc: http://developer.echonest.com/docs/v4/artist.html#profile
        */
-      get: function(data, callback) {
+      get: function(data) {
         if (data instanceof Object) {
-          query('artist/profile', data, function(result) {
-            callback(new Artist(result.artist), result.status);
+          return query('artist/profile', data).then(function(data) {
+            return new Artist(data.artist);
           });
         }
-
-        return this;
       },
 
       /*
@@ -190,14 +188,10 @@
        *
        * doc: http://developer.echonest.com/docs/v4/artist.html#top-hottt
        */
-      topHot: function(params, callback) {
+      topHot: function(params) {
         var data = getParams(params);
 
-        artistsGet.call(this, 'top_hottt', data, function(artists, status) {
-          callback(artists, status);
-        });
-
-        return this;
+        return artistsGet.call(this, 'top_hottt', data);
       },
 
       /*
@@ -205,14 +199,10 @@
        *
        * doc: http://developer.echonest.com/docs/v4/artist.html#suggest-beta
        */
-      suggest: function(params, callback) {
+      suggest: function(params) {
         var data = getParams(params);
 
-        artistsGet.call(this, 'suggest', data, function(artists, status) {
-          callback(artists, status);
-        });
-
-        return this;
+        return artistsGet.call(this, 'suggest', data);
       },
 
       /*
@@ -220,14 +210,10 @@
        *
        * doc: http://developer.echonest.com/docs/v4/artist.html#extract-beta
        */
-      extract: function(params, callback) {
+      extract: function(params) {
         var data = getParams(params);
 
-        artistsGet.call(this, 'extract', data, function(artists, status) {
-          callback(artists, status);
-        });
-
-        return this;
+        return artistsGet.call(this, 'extract', data);
       }
     };
 
@@ -244,14 +230,12 @@
        *
        * doc: http://developer.echonest.com/docs/v4/song.html#search
        */
-      search: function(params, callback) {
+      search: function(params) {
         var data = getParams(params);
 
-        query('song/search', data, function(result) {
-          callback(result.songs, result.status);
+        return query('song/search', data).then(function(result) {
+          return result.songs;
         });
-
-        return this;
       },
 
       /*
@@ -259,14 +243,12 @@
        *
        * doc: http://developer.echonest.com/docs/v4/song.html#profile
        */
-      get: function(data, callback) {
+      get: function(data) {
         if (data instanceof Object) {
-          query('song/profile', data, function(result) {
-            callback(result.songs[0], result.status);
+          return query('song/profile', data).then(function(result) {
+            return result.songs[0];
           });
         }
-
-        return this;
       },
 
       /*
@@ -274,20 +256,19 @@
        *
        * doc: http://developer.echonest.com/docs/v4/song.html#identify
        */
-      identify: function(params, callback) {
+      identify: function(params) {
         var data = getParams(params);
 
-        query('song/identify', data, function(result) {
-          callback(result.songs, result.status);
+        return query('song/identify', data).then(function(result) {
+          return result.songs;
         });
-
-        return this;
       }
     };
 
 
-    this.$get = function($http) {
+    this.$get = function($http, $q) {
       http = $http;
+      q = $q;
 
       obj = {
         artists: new Artists(),
