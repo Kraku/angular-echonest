@@ -17,5 +17,8 @@
     "grunt-karma": "~0.8.2",
     "karma-jasmine": "~0.2.2",
     "karma-phantomjs-launcher": "~0.1.2"
-	}
+	},
+  "scripts": {
+   "test": "./node_modules/karma/bin/karma start karma.config.js --no-auto-watch --single-run --reporters=dots --browsers=PhantomJS"
+  }
 }
