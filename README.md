@@ -1,4 +1,4 @@
-Angular-echonest v0.2.2
+Angular-echonest v0.2.3
 =============
 
 Angular-echonest allows you to easily call Echo Nest methods in AngularJS.
