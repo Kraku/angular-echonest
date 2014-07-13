@@ -5,9 +5,6 @@ Angular-echonest allows you to easily call Echo Nest methods in AngularJS.
 
 Uses EchoNest API v4.
 
-## Status
-This module is still under heavy development.
-
 ## Installation
 ```js
 var myApp = angular.module('myApp', [
