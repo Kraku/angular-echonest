@@ -1,4 +1,4 @@
-Angular-echonest v0.2.3 [![Build Status](https://travis-ci.org/Kraku/angular-echonest.svg?branch=master)](https://travis-ci.org/Kraku/angular-echonest)
+Angular-echonest v0.2.4 [![Build Status](https://travis-ci.org/Kraku/angular-echonest.svg?branch=master)](https://travis-ci.org/Kraku/angular-echonest)
 =============
 
 Angular-echonest allows you to easily call Echo Nest methods in AngularJS.

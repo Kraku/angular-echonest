@@ -266,7 +266,7 @@
     };
 
 
-    this.$get = function($http, $q) {
+    this.$get = ['$http', '$q', function($http, $q) {
       http = $http;
       q = $q;
 
@@ -276,6 +276,6 @@
       };
 
       return obj;
-    };
+    }];
   });
 })();
