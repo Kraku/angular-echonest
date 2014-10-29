@@ -150,25 +150,123 @@ describe('Artists', function() {
     httpBackend.flush();
   });
 
-  it('all artist methods should insert array into artist object', function() {
-    var artist = getSingleArtist()
-      .getBiographies()
-      .getBlogs()
-      .getImages()
-      .getNews()
-      .getReviews()
-      .getSongs()
-      .getFamiliarity()
-      .getHotnes()
-      .getSimilar()
-      .getTerms()
-      .getTwitter()
-      .getUrls();
+  it('getBiographies method should insert biographies array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getBiographies().then(function(artist) {
+      expect(artist.biographies instanceof Array).toBe(true);
+    });
 
     httpBackend.flush();
+  });
 
-    for (var i in artistApiMethods) {
-      expect(artist[artistApiMethods[i]] instanceof Array).toBe(true);
-    }
+  it('getBlogs method should insert blogs array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getBlogs().then(function(artist) {
+      expect(artist.blogs instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getImages method should insert images array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getImages().then(function(artist) {
+      expect(artist.images instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getNews method should insert news array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getNews().then(function(artist) {
+      expect(artist.news instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getReviews method should insert reviews array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getReviews().then(function(artist) {
+      expect(artist.reviews instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getSongs method should insert songs array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getSongs().then(function(artist) {
+      expect(artist.songs instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getFamiliarity method should insert familiarity array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getFamiliarity().then(function(artist) {
+      expect(artist.familiarity instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getHotnes method should insert hotttnesss array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getHotnes().then(function(artist) {
+      expect(artist.hotttnesss instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getSimilar method should insert similar array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getSimilar().then(function(artist) {
+      expect(artist.similar instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getTerms method should insert terms array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getTerms().then(function(artist) {
+      expect(artist.terms instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getTwitter method should insert twitter array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getTwitter().then(function(artist) {
+      expect(artist.twitter instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
+  });
+
+  it('getUrls method should insert urls array into artist object', function() {
+    var artist = getSingleArtist();
+
+    artist.getUrls().then(function(artist) {
+      expect(artist.urls instanceof Array).toBe(true);
+    });
+
+    httpBackend.flush();
   });
 });

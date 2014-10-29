@@ -32,6 +32,7 @@
     };
 
     var artistGet = function(name, data) {
+      var deferred = q.defer();
       var t = this;
       data = data || {};
 
@@ -39,9 +40,11 @@
 
       query('artist/' + name, data).then(function(result) {
         t[name] = result[name];
+
+        deferred.resolve(t);
       });
 
-      return t;
+      return deferred.promise;
     };
 
     var getParams = function(params) {
@@ -90,64 +93,40 @@
 
     Artist.prototype = {
       getBiographies: function(data) {
-        artistGet.call(this, 'biographies', data);
-
-        return this;
+        return artistGet.call(this, 'biographies', data);
       },
       getBlogs: function(data) {
-        artistGet.call(this, 'blogs', data);
-
-        return this;
+        return artistGet.call(this, 'blogs', data);
       },
       getImages: function(data) {
-        artistGet.call(this, 'images', data);
-
-        return this;
+        return artistGet.call(this, 'images', data);
       },
       getNews: function(data) {
-        artistGet.call(this, 'news', data);
-
-        return this;
+        return artistGet.call(this, 'news', data);
       },
       getReviews: function(data) {
-        artistGet.call(this, 'reviews', data);
-
-        return this;
+        return artistGet.call(this, 'reviews', data);
       },
       getSongs: function(data) {
-        artistGet.call(this, 'songs', data);
-
-        return this;
+        return artistGet.call(this, 'songs', data);
       },
       getFamiliarity: function(data) {
-        artistGet.call(this, 'familiarity', data);
-
-        return this;
+        return artistGet.call(this, 'familiarity', data);
       },
       getHotnes: function(data) {
-        artistGet.call(this, 'hotttnesss', data);
-
-        return this;
+        return artistGet.call(this, 'hotttnesss', data);
       },
       getSimilar: function(data) {
-        artistGet.call(this, 'similar', data);
-
-        return this;
+        return artistGet.call(this, 'similar', data);
       },
       getTerms: function(data) {
-        artistGet.call(this, 'terms', data);
-
-        return this;
+        return artistGet.call(this, 'terms', data);
       },
       getTwitter: function(data) {
-        artistGet.call(this, 'twitter', data);
-
-        return this;
+        return artistGet.call(this, 'twitter', data);
       },
       getUrls: function(data) {
-        artistGet.call(this, 'urls', data);
-
-        return this;
+        return artistGet.call(this, 'urls', data);
       }
     };
 
