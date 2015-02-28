@@ -127,9 +127,6 @@
       },
       getUrls: function(data) {
         return artistGet.call(this, 'urls', data);
-      },
-      getVideo: function(data) {
-        return artistGet.call(this, 'video', data);
       }
     };
 
