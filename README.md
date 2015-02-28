@@ -55,6 +55,7 @@ grunt karma:unit
   - **getTerms** - Get a list of most descriptive terms for an artist.
   - **getTwitter** - Gets the twitter handle for an artist.
   - **getUrls** - Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, and official URL.
+  - **getVideo** - Get a list of video documents found on the web related to an artist.
 
 [Artist Api Doc](http://developer.echonest.com/docs/v4/artist.html)
 
