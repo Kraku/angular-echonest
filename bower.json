@@ -1,5 +1,9 @@
 {
   "name": "angular-echonest",
-  "version": "0.2.5",
-  "main": "build/angular-echonest.js"
+  "version": "0.2.6",
+  "main": "build/angular-echonest.js",
+  "devDependencies": {
+    "angular": "1.4.8",
+    "angular-mocks": "1.4.8"
+  }
 }

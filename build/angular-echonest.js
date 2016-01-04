@@ -39,7 +39,11 @@
       data.id = t.id;
 
       query('artist/' + name, data).then(function(result) {
-        t[name] = result[name];
+        if (result['artists']) {
+          t[name] = result['artists'];
+        } else {
+          t[name] = result[name];
+        }
 
         deferred.resolve(t);
       });
