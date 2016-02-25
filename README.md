@@ -67,9 +67,9 @@ grunt karma:unit
 [Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
 
 ### Playlist Methods
-  - **statick** - Search for songs given different query types.
+  - **statick** - Generates a playlist of up to 100 tracks based on 1-5 artists, 1-5 songs, 1-5 genres, or a single Taste Profile.
 
-[Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
+[Playlist Api Doc](http://developer.echonest.com/docs/v4/standard.html)
 
 
 ## Example
@@ -152,7 +152,6 @@ Echonest.songs.identify({
 }).then(function(songs) {
   console.log(songs); // -> [{artist_id: "ARXPPEY1187FB51DF4", artist_name: "Michael Jackson", id: "SODJXOA1313438FB61", message: "OK (match type 5)", score: 54, title: "Billie Jean"}]
 });
-```
 ```
 
 #### Get playlist
