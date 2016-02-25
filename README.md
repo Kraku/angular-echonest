@@ -67,7 +67,7 @@ grunt karma:unit
 [Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
 
 ### Playlist Methods
-  - **statick** - Generates a playlist of up to 100 tracks based on 1-5 artists, 1-5 songs, 1-5 genres, or a single Taste Profile.
+  - **static** - Generates a playlist of up to 100 tracks based on 1-5 artists, 1-5 songs, 1-5 genres, or a single Taste Profile.
 
 [Playlist Api Doc](http://developer.echonest.com/docs/v4/standard.html)
 
