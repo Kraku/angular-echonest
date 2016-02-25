@@ -66,6 +66,11 @@ grunt karma:unit
 
 [Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
 
+### Playlist Methods
+  - **statick** - Search for songs given different query types.
+
+[Song Api Doc](http://developer.echonest.com/docs/v4/song.html)
+
 
 ## Example
 #### Get artist songs
@@ -146,6 +151,22 @@ Echonest.songs.identify({
   code: 'eJxVlIuNwzAMQ1fxCDL133-xo1rnGqNAEcWy_ERa2aKeZmW9ustWVYrXrl5bthn_laFkzguNWpklEmoTB74JKYZSPlbJ0sy9fQrsrbEaO9W3bsbaWOoK7IhkHFaf_ag2d75oOQSZczbz5CKA7XgTIBIXASvFi0A3W8pMUZ7FZTWTVbujCcADlQ_f_WbdRNJ2vDUwSF0EZmFvAku_CVy440fgiIvArWZZWoJ7GWd-CVTYC5FCFI8GQdECdROE20UQfLoIUmhLC7IiByF1gzbAs3tsSKctyC76MPJlHRsZ5qhSQhu_CJFcKtW4EMrHSIrpTGLFqsdItj1H9JYHQYN7W2nkC6GDPjZTAzL9dx0fS4M1FoROHh9YhLHWdRchQSd_CLTpOHkQQP3xQsA2-sLOUD7CzxU0GmHVdIxh46Oide0NrNEmjghG44Ax_k2AoDHsiV6WsiD6OFm8y-0Lyt8haDBBzeMlAnTuuGYIB4WA2lEPAWbdeOabgFN6TQMs6ctLA5fHyKMBB0veGrjPfP00IAlWNm9n7hEh5PiYYBGKQDP-x4F0CL8HkhoQnRWN997JyEpnHFR7EhLPQMZmgXS68hsHktEVErranvSSR2VwfJhQCnkuwhBUcINNY-xu1pmw3PmBqU9-8xu0kiF1ngOa8vwBSSzzNw=='
 }).then(function(songs) {
   console.log(songs); // -> [{artist_id: "ARXPPEY1187FB51DF4", artist_name: "Michael Jackson", id: "SODJXOA1313438FB61", message: "OK (match type 5)", score: 54, title: "Billie Jean"}]
+});
+```
+```
+
+#### Get playlist
+```js
+Echonest.playlist.static({
+  type:'song-radio',
+  song_id:'SOFCSFT144EBE57815',
+  song_id:'SOFSRXH12A6D4F9447',
+  bucket:'tracks',
+  bucket:'artist_hotttnesss',
+  bucket:'song_hotttnesss',
+  bucket:'audio_summary',
+  }).then(function(songs) {
+    console.log(songs);
 });
 ```
 
