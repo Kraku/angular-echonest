@@ -11,7 +11,7 @@
     angular.module('angular-echonest', []).provider('Echonest', function() {
         var apiUrl = 'http://developer.echonest.com/api/v4/';
         var apiKey = '';
-        var Artist, Artists, Songs, obj, http, q;
+        var Artist, Artists, Songs, Playlist, Genre, Track, obj, http, q;
 
         var query = function(url, data) {
             var deferred = q.defer();
@@ -39,7 +39,11 @@
             data.id = t.id;
 
             query('artist/' + name, data).then(function(result) {
-                t[name] = result[name];
+                if (result['artists']) {
+                    t[name] = result['artists'];
+                } else {
+                    t[name] = result[name];
+                }
 
                 deferred.resolve(t);
             });
@@ -271,6 +275,79 @@
 
         };
 
+        //Genre class
+        Genre = function() {
+            return this;
+        };
+
+        Genre.prototype = {
+
+            /*
+             * Return the top artists for the given genre
+             *
+             * doc: http://developer.echonest.com/docs/v4/genre.html#artists
+             */
+            artists: function(data) {
+                if (data instanceof Object) {
+                    return query('genre/artists', data).then(function(result) {
+                        return result.artists;
+                    });
+                }
+            },
+
+            /*
+             * Returns a list of all of the available genres.
+             *
+             * doc: http://developer.echonest.com/docs/v4/genre.html#list
+             */
+            list: function(data) {
+                if (data instanceof Object) {
+                    return query('genre/list', data).then(function(result) {
+                        return result.genres;
+                    });
+                }
+            },
+
+            /*
+             * Return similar genres to a given genre.
+             *
+             * doc: http://developer.echonest.com/docs/v4/genre.html#similar
+             */
+            similar: function(data) {
+                if (data instanceof Object) {
+                    return query('genre/similar', data).then(function(result) {
+                        return result.genres;
+                    });
+                }
+            },
+
+
+
+        };
+
+        //Track class
+        Track = function() {
+            return this;
+        };
+
+        Track.prototype = {
+
+            /*
+             * Get info about tracks given an id or md5. The md5 parameter is the file md5.
+             *
+             * doc: http://developer.echonest.com/docs/v4/track.html#profile
+             */
+            profile: function(data) {
+                if (data instanceof Object) {
+                    return query('track/profile', data).then(function(result) {
+                        return result.track;
+                    });
+                }
+            },
+
+
+
+        };
 
         this.$get = ['$http', '$q', function($http, $q) {
             http = $http;
@@ -279,7 +356,9 @@
             obj = {
                 artists: new Artists(),
                 songs: new Songs(),
-                playlist: new Playlist()
+                playlist: new Playlist(),
+                genre: new Genre(),
+                track: new Track(),
             };
 
             return obj;
